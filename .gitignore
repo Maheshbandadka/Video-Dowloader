@@ -11,6 +11,4 @@ node_modules/*
 
 views/swagger-api-view.json
 
-# For Config remover
-*/config/*.json
-*.json
+

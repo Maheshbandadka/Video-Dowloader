@@ -13,7 +13,6 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import Helmet from 'helmet';
 import Compression from 'compression'
-
 process
   .on('unhandledRejection', (reason, promise) => {
     Logger.info(
