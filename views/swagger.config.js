@@ -1,6 +1,5 @@
 import swaggerAutogen from 'swagger-autogen';
 const swagger = swaggerAutogen()
-import config from 'config'
 
 
 const doc = {
@@ -9,7 +8,7 @@ const doc = {
     "title": "Dowloader Service",                  // by default: "REST API"
     "description": "Documentation"             // by default: ""
   },
- host: config.get('swagger_host_url'),                         // by default: "localhost:3000"
+  host: "video-dowloader.herokuapp.com",                         // by default: "localhost:3000"
   basePath: "/",                     // by default: "/"
   schemes: ["http", "https"],                      // by default: ['http']
   consumes: ['application/json'],
@@ -20,7 +19,7 @@ const doc = {
 
   },        // by default: empty object
   definitions: {
- 
+
   }                  // by default: empty object
 }
 
