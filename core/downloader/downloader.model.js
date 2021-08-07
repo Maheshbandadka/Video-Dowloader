@@ -20,13 +20,13 @@ class DownloaderLis {
   async getInstagramDownloadUrl(url_media) {
     return new Promise((resolve, reject) => {
       url_media = url_media.replace("reel", "p")
-      axios.get(url_media, {
+      axios.post(url_media, {
         headers: {
           "User-Agent":
             "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:55.0) Gecko/20100101 Firefox/55.0",
         }
       }).then(result => {
-        logger.info(`result ${result}`)
+        logger.info(`result ${JSON.stringify(result)}`)
         let $ = cheerio.load(result.data), ig = []
         $('script[type="text/javascript"]').each((i, element) => {
           let cheerioElement = $(element)
