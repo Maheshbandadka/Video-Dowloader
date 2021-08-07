@@ -5,13 +5,14 @@ class Routes {
   constructor(app) {
     this.configureCors(app);
     app.use('/v1/', downloader);
-   
+
   }
 
   configureCors(app) {
     app.use((req, res, next) => {
       res.setHeader('Access-Control-Allow-Origin', '*');
       res.setHeader('Access-Control-Allow-Methods', 'POST, PUT, DELETE, GET');
+      res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
       res.setHeader('Cache-Control', 'no-cache');
       next();
     });
