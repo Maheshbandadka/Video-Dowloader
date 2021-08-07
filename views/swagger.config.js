@@ -1,14 +1,14 @@
 import swaggerAutogen from 'swagger-autogen';
 const swagger = swaggerAutogen()
 
-
+let host = process.env.swagger
 const doc = {
   info: {
     "version": "1.0",                // by default: "1.0.0"
     "title": "Dowloader Service",                  // by default: "REST API"
     "description": "Documentation"             // by default: ""
   },
-  host: "video-dowloader.herokuapp.com",                         // by default: "localhost:3000"
+  host,                        // by default: "localhost:3000"
   basePath: "/",                     // by default: "/"
   schemes: ["http", "https"],                      // by default: ['http']
   consumes: ['application/json'],
