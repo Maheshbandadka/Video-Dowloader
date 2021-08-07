@@ -13,6 +13,8 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import Helmet from 'helmet';
 import Compression from 'compression'
+process.env.NODE_ENV ?? 'localDev';
+
 process
   .on('unhandledRejection', (reason, promise) => {
     Logger.info(
@@ -53,7 +55,7 @@ app.use(Helmet(), Compression());
 app.get('/', (req, res) => {
   res.redirect('/explorer')
 })
-app.listen(config.get('videoDownloader.port'), () => {
-  console.log(`App listening at http://localhost:${config.get('videoDownloader.port')}`)
-  Logger.info(`App listening at http://localhost:${config.get('videoDownloader.port')}`)
+app.listen(3000, () => {
+  console.log(`App listening at http://localhost:3000`)
+  Logger.info(`App listening at http://localhost:3000`)
 })
