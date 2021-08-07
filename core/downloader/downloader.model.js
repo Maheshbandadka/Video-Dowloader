@@ -4,10 +4,7 @@ import ytdl from 'ytdl-core'
 import facebookGetLink from 'facebook-video-link'
 import twitterGetUrl from 'twitter-url-direct'
 import logger from '../../views/logger.js'
-import Agent from 'https-proxy-agent';
 
-const proxy = 'http://202.153.130.214:80';
-const agent = new Agent(proxy);
 
 class DownloaderLis {
 
@@ -20,13 +17,8 @@ class DownloaderLis {
   async getInstagramDownloadUrl(url_media) {
     return new Promise((resolve, reject) => {
       url_media = url_media.replace("reel", "p")
-      axios.post(url_media, {
-        headers: {
-          "User-Agent":
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:55.0) Gecko/20100101 Firefox/55.0",
-        }
-      }).then(result => {
-        logger.info(`result ${JSON.stringify(result)}`)
+      axios.get(url_media).then(result => {
+        logger.info(`result data ${result.data}`)
         let $ = cheerio.load(result.data), ig = []
         $('script[type="text/javascript"]').each((i, element) => {
           let cheerioElement = $(element)
@@ -66,9 +58,7 @@ class DownloaderLis {
    */
   async getYoutubeDownloadUrl(url_media) {
     return new Promise((resolve, reject) => {
-      ytdl(url_media, {
-        requestOptions: { agent }
-      })
+      ytdl(url_media)
         .on('info', (info) => {
           resolve(info.player_response.streamingData)// the video title
         });
