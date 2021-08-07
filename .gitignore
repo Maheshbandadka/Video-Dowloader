@@ -7,8 +7,4 @@ node_modules/*
 # Log files
 *.log
 
-# Swagger view files
-
-views/swagger-api-view.json
-
 
