@@ -55,7 +55,7 @@ app.use(Helmet(), Compression());
 app.get('/', (req, res) => {
   res.redirect('/explorer')
 })
-app.listen(3000, () => {
-  console.log(`App listening at http://localhost:3000`)
-  Logger.info(`App listening at http://localhost:3000`)
-})
+app.listen(process.env.PORT || 3000, () => {
+  console.log("Express server listening on port %d in %s mode", process.env.PORT, app.settings.env);
+  Logger.info(`App listening at ${process.env.PORT}, ${app.settings.env}`)
+});
