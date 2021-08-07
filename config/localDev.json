@@ -1,0 +1,6 @@
+{
+    "videoDownloader": {
+        "port": 3000
+    },
+    "swagger_host_url": "localhost:3000"
+}

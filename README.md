@@ -40,6 +40,7 @@ If you need to update `npm`, you can make it using `npm`! Cool right? After runn
 
     $ git clone https://github.com/Maheshbandadka/Video-Dowloader
     $ cd Video dowloader
+    $ set node_env=localDev
     $ npm i
 
 ## Running the project
