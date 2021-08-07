@@ -1,0 +1,93 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "Dowloader Service",
+    "description": "Documentation"
+  },
+  "host": "video-dowloader.herokuapp.com",
+  "basePath": "/",
+  "tags": [],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions": {},
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/get-instagram-download-url": {
+      "post": {
+        "tags": [
+          "Video Downloader"
+        ],
+        "description": "To get downloadable link from url",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/v1/get-youtube-download-url": {
+      "post": {
+        "tags": [
+          "Video Downloader"
+        ],
+        "description": "To get downloadable link from url",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/v1/get-facebook-download-url": {
+      "post": {
+        "tags": [
+          "Video Downloader"
+        ],
+        "description": "To get downloadable link from url",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/v1/get-twitter-download-url": {
+      "post": {
+        "tags": [
+          "Video Downloader"
+        ],
+        "description": "To get downloadable link from url",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    }
+  },
+  "definitions": {}
+}
