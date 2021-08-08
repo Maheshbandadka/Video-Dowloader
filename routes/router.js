@@ -12,7 +12,7 @@ class Routes {
     app.use((req, res, next) => {
       res.setHeader('Access-Control-Allow-Origin', '*');
       res.setHeader('Access-Control-Allow-Methods', 'POST, PUT, DELETE, GET');
-      res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
       res.setHeader('Cache-Control', 'no-cache');
       next();
     });
