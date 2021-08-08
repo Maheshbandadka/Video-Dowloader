@@ -14,6 +14,8 @@ import cookieParser from 'cookie-parser';
 import Helmet from 'helmet';
 import Compression from 'compression'
 process.env.NODE_ENV ?? 'localDev';
+import httpProxy from 'http-proxy'
+const proxy = httpProxy.createProxyServer({});
 
 process
   .on('unhandledRejection', (reason, promise) => {
@@ -50,6 +52,10 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(Helmet(), Compression());
 
+app.get('*', function (req, res) {
+  console.log('Request', req.method, req.url);
+  proxy.web(req, res, { target: `${req.protocol}://${req.hostname}` });
+});
 
 
 app.get('/', (req, res) => {
