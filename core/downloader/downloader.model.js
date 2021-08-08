@@ -18,9 +18,11 @@ class DownloaderLis {
     return new Promise((resolve, reject) => {
       url_media = url_media.replace("reel", "p")
       axios.get(url_media).then(result => {
+        logger.info(`element  ${result.data}`)
+
         let $ = cheerio.load(result.data), ig = []
         $('script[type="text/javascript"]').each(async (i, element) => {
-          logger.info(`element  ${JSON.stringifyelement}`)
+          logger.info(`element  ${element}`)
 
           let cheerioElement = $(element)
           var contentScript = cheerioElement.html()
