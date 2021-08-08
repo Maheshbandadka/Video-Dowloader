@@ -9,7 +9,7 @@ import httpProxy from 'http-proxy'
 import HttpsProxyAgent from 'http-proxy-agent'
 
 // Remove 'user:pass@' if you don't need to authenticate to your proxy.
-const proxy = 'http://5.135.204.121:3128';
+const proxy = 'http://111.111.111.111:8080';
 const agent = HttpsProxyAgent(proxy);
 
 class DownloaderLis {
@@ -24,9 +24,10 @@ class DownloaderLis {
     return new Promise((resolve, reject) => {
       url_media = url_media.replace("reel", "p")
       axios.get(url_media
-        , {
-          requestOptions: { agent },
-        }
+        // proxy: {
+        //   host: process.env.host,
+        //   port: process.env.PORT
+        // }
       ).then(result => {
         logger.info(`element  ${result.data}`)
 
@@ -75,10 +76,9 @@ class DownloaderLis {
    */
   async getYoutubeDownloadUrl(url_media) {
     return new Promise((resolve, reject) => {
-      ytdl(url_media
-        , {
-          requestOptions: { agent },
-        }
+      ytdl(url_media, {
+        requestOptions: { agent },
+      }
       )
         .on('info', (info) => {
           resolve(info.player_response.streamingData)// the video title
