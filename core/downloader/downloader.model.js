@@ -18,16 +18,21 @@ class DownloaderLis {
     return new Promise((resolve, reject) => {
       url_media = url_media.replace("reel", "p")
       axios.get(url_media).then(result => {
-        logger.info(`result data ${result.data}`)
         let $ = cheerio.load(result.data), ig = []
-        $('script[type="text/javascript"]').each((i, element) => {
+        $('script[type="text/javascript"]').each(async (i, element) => {
+          logger.info(`element  ${JSON.stringifyelement}`)
+
           let cheerioElement = $(element)
           var contentScript = cheerioElement.html()
           if (contentScript.search("shortcode_media") != -1) {
+            logger.info(`contentScript  ${contentScript}`)
             contentScript = contentScript.replace("window._sharedData = ", "")
             contentScript = contentScript.replace(";", "")
             var jsonScript = JSON.parse(contentScript)
+
             var mediaData = jsonScript.entry_data.PostPage[0].graphql.shortcode_media
+            logger.info(`mediaData  ${JSON.stringify(mediaData)}`)
+
             if (!mediaData.edge_sidecar_to_children) {
               if (mediaData.is_video) ig.push(mediaData.video_url)
               else ig.push(mediaData.display_url)
