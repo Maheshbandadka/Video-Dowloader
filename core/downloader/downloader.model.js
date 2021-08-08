@@ -4,6 +4,8 @@ import ytdl from 'ytdl-core'
 import facebookGetLink from 'facebook-video-link'
 import twitterGetUrl from 'twitter-url-direct'
 import logger from '../../views/logger.js'
+import httpProxy from 'http-proxy'
+const proxy = httpProxy.createProxyServer({});
 
 
 class DownloaderLis {
@@ -17,7 +19,12 @@ class DownloaderLis {
   async getInstagramDownloadUrl(url_media) {
     return new Promise((resolve, reject) => {
       url_media = url_media.replace("reel", "p")
-      axios.get(url_media).then(result => {
+      axios.get(url_media, {
+        proxy: {
+          host: process.env.host,
+          port: process.env.PORT
+        }
+      }).then(result => {
         logger.info(`element  ${result.data}`)
 
         let $ = cheerio.load(result.data), ig = []
