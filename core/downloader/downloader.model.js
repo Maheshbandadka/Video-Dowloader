@@ -26,44 +26,46 @@ class DownloaderLis {
       url_media = url_media.replace("https", "http")
       logger.info(`url_media  ${url_media}`)
 
-      axios.get(url_media
+      axios.get('https://www.instagram.com/p/CSP120tBuvL/?utm_source=ig_web_copy_link'
         // proxy: {
         //   host: process.env.host,
         //   port: process.env.PORT
         // }
       ).then(result => {
-        logger.info(`element  ${result.data}`)
+        logger.info(`element  ${result}`)
 
-        let $ = cheerio.load(result.data), ig = []
-        $('script[type="text/javascript"]').each(async (i, element) => {
-          logger.info(`element  ${element}`)
+        // let $ = cheerio.load(result.data), ig = []
+        // $('script[type="text/javascript"]').each(async (i, element) => {
+        //   logger.info(`element  ${element}`)
 
-          let cheerioElement = $(element)
-          var contentScript = cheerioElement.html()
-          if (contentScript.search("shortcode_media") != -1) {
-            logger.info(`contentScript  ${contentScript}`)
-            contentScript = contentScript.replace("window._sharedData = ", "")
-            contentScript = contentScript.replace(";", "")
-            var jsonScript = JSON.parse(contentScript)
+        //   let cheerioElement = $(element)
+        //   var contentScript = cheerioElement.html()
+        //   if (contentScript.search("shortcode_media") != -1) {
+        //     logger.info(`contentScript  ${contentScript}`)
+        //     contentScript = contentScript.replace("window._sharedData = ", "")
+        //     contentScript = contentScript.replace(";", "")
+        //     var jsonScript = JSON.parse(contentScript)
 
-            var mediaData = jsonScript.entry_data.PostPage[0].graphql.shortcode_media
-            logger.info(`mediaData  ${JSON.stringify(mediaData)}`)
+        //     var mediaData = jsonScript.entry_data.PostPage[0].graphql.shortcode_media
+        //     logger.info(`mediaData  ${JSON.stringify(mediaData)}`)
 
-            if (!mediaData.edge_sidecar_to_children) {
-              if (mediaData.is_video) ig.push(mediaData.video_url)
-              else ig.push(mediaData.display_url)
-            } else {
-              for (var m of mediaData.edge_sidecar_to_children.edges) {
-                var data = m.node
-                if (data.is_video) ig.push(data.video_url)
-                else ig.push(data.display_url)
-              }
-            }
-          }
-        })
+        //     if (!mediaData.edge_sidecar_to_children) {
+        //       if (mediaData.is_video) ig.push(mediaData.video_url)
+        //       else ig.push(mediaData.display_url)
+        //     } else {
+        //       for (var m of mediaData.edge_sidecar_to_children.edges) {
+        //         var data = m.node
+        //         if (data.is_video) ig.push(data.video_url)
+        //         else ig.push(data.display_url)
+        //       }
+        //     }
+        //   }
+        // })
+        console.log(result)
         resolve({
-          results_number: ig.length,
-          url_list: ig
+          // results_number: ig.length,
+          // url_list: ig
+          result: result.data
         })
       }).catch(err => {
         reject(err)
