@@ -23,6 +23,9 @@ class DownloaderLis {
   async getInstagramDownloadUrl(url_media) {
     return new Promise((resolve, reject) => {
       url_media = url_media.replace("reel", "p")
+      url_media = url_media.replace("https", "http")
+      logger.info(`url_media  ${url_media}`)
+
       axios.get(url_media
         // proxy: {
         //   host: process.env.host,
