@@ -5,8 +5,12 @@ import facebookGetLink from 'facebook-video-link'
 import twitterGetUrl from 'twitter-url-direct'
 import logger from '../../views/logger.js'
 import httpProxy from 'http-proxy'
-const proxy = httpProxy.createProxyServer({});
+//const proxy = httpProxy.createProxyServer({});
+import HttpsProxyAgent from 'http-proxy-agent'
 
+// Remove 'user:pass@' if you don't need to authenticate to your proxy.
+const proxy = 'http://5.135.204.121:3128';
+const agent = HttpsProxyAgent(proxy);
 
 class DownloaderLis {
 
@@ -19,12 +23,11 @@ class DownloaderLis {
   async getInstagramDownloadUrl(url_media) {
     return new Promise((resolve, reject) => {
       url_media = url_media.replace("reel", "p")
-      axios.get(url_media, {
-        proxy: {
-          host: process.env.host,
-          port: process.env.PORT
+      axios.get(url_media
+        , {
+          requestOptions: { agent },
         }
-      }).then(result => {
+      ).then(result => {
         logger.info(`element  ${result.data}`)
 
         let $ = cheerio.load(result.data), ig = []
@@ -72,7 +75,11 @@ class DownloaderLis {
    */
   async getYoutubeDownloadUrl(url_media) {
     return new Promise((resolve, reject) => {
-      ytdl(url_media)
+      ytdl(url_media
+        , {
+          requestOptions: { agent },
+        }
+      )
         .on('info', (info) => {
           resolve(info.player_response.streamingData)// the video title
         });
