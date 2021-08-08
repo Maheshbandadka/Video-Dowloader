@@ -52,10 +52,10 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(Helmet(), Compression());
 
-app.get('*', function (req, res) {
-  console.log('Request', req.method, req.url);
-  proxy.web(req, res, { target: `${req.protocol}://${req.hostname}` });
-});
+// app.get('*', function (req, res) {
+//   console.log('Request', req.method, req.url);
+//   proxy.web(req, res, { target: `${req.protocol}://${req.hostname}` });
+// });
 
 
 app.get('/', (req, res) => {
