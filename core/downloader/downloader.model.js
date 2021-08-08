@@ -20,10 +20,10 @@ class DownloaderLis {
     return new Promise((resolve, reject) => {
       url_media = url_media.replace("reel", "p")
       axios.get(url_media, {
-        proxy: {
-          host: process.env.host,
-          port: process.env.PORT
-        }
+        // proxy: {
+        //   host: process.env.host,
+        //   port: process.env.PORT
+        // }
       }).then(result => {
         logger.info(`element  ${result.data}`)
 
